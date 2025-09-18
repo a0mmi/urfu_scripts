@@ -1,1 +1,1 @@
-# urfu_scripts
+ДЗ 1: Cn ->(encode ESC) out.txt ->(decode ESC) out1.txt ->(encode Jump) out2.txt -> (decode Jump) out3.txt |||(RLE)
