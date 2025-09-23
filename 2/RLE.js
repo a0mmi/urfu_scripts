@@ -88,9 +88,9 @@ export class RLE{
             let uLth;
 
             if(cnts >= 2 && cnts <= 127){
-                const bytesRule1 = 2;
-                const bytesRule2 = 1 + cntd;
-                if(bytesRule1 <= bytesRule2){
+                const bR1 = 2;
+                const bR2 = 1 + cntd;
+                if(bR1 <= bR2){
                     uR = true;
                     uLth = cnts;
                 } else{

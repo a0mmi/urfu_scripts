@@ -1,0 +1,17 @@
+# gcd.biba - алгоритм Евклида
+a: 0
+b: 0
+t: 0
+
+input a
+input b
+
+loop:
+jz b end
+mod a b t
+mov a b
+mov b t
+jmp loop
+
+end:
+output a

@@ -1,0 +1,24 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "ДЗ 1: Cn ->(encode ESC) out.txt ->(decode ESC) out1.txt ->(encode Jump) out2.txt -> (decode Jump) out3.txt |||(RLE)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a0mmi/urfu_scripts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a0mmi/urfu_scripts/issues"
+  },
+  "homepage": "https://github.com/a0mmi/urfu_scripts#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}

@@ -1,0 +1,18 @@
+# факториал
+n: 0
+res: 0
+i: 0
+one: 1
+
+input n
+mov i n
+set res 1
+
+loop:
+jz i end
+mul res i
+sub i one
+jmp loop
+
+end:
+output res

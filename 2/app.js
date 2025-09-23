@@ -38,3 +38,4 @@ console.log(writeFile(pathDeESC, rle.decodeESC(seens)))
 let sejump = rle.encodeJump(s)
 console.log(writeFile(pathEnJump, sejump))
 console.log(writeFile(pathDeJump, rle.decodeJump(sejump)))
+ 
