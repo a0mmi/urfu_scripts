@@ -1,0 +1,8 @@
+# Простой цикл
+start:
+    set 0 5
+loop:
+    output 0
+    set 1 1
+    sub 0 1
+    jnz 0 loop

@@ -1,9 +1,0 @@
-set 10 5
-output 10
-add 10 -1
-jnz 10 label1
-set 999 12
-output 999
-
-label1:
-output 999

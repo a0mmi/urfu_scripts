@@ -1,0 +1,20 @@
+# Возведение в степень числа
+start:
+    input 0          
+    input 1          
+    set 2 1          
+    set 3 0          
+
+    jz 1 output_res  
+
+pow_loop:
+    mul 2 0          
+    set 4 1          
+    add 3 4
+    
+    mov 5 1
+    sub 5 3
+    jnz 5 pow_loop
+
+output_res:
+    output 2

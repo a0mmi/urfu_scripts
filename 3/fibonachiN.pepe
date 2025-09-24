@@ -1,0 +1,22 @@
+start:
+    input 0
+    set 4 1
+    set 1 0
+    set 2 1
+    jz 0 out_a
+    mov 5 0
+    sub 5 4
+    jz 5 out_b
+loop:
+    mov 3 1
+    add 3 2
+    mov 1 2
+    mov 2 3
+    sub 5 4
+    jnz 5 loop
+out_b:
+    output 2
+    jmp end
+out_a:
+    output 1
+end:

@@ -9,7 +9,7 @@ export class Program {
 
     constructor(s) {
         this.s = s;
-    }
+    } 
 
     programProcessing() {
         const lines = this.s.split(/\r?\n/);
