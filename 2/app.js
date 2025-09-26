@@ -1,41 +1,28 @@
-import {readFileSync, writeFileSync} from 'node:fs';
-import {RLE} from './RLE.js'
+import { readFileSync } from 'node:fs';
+import { Program } from './program.js';
 
 
-// laatin1 - 8битная ASCII иль расширеная
 function readFile(path) {
     try {
-        const data = readFileSync(path, 'latin1');
+        const data = readFileSync(path, 'utf-8');
         return data;
     } catch (err) {
-        return err;
+        console.error(`ERROR: ${err.message}`);
+        process.exit(1);
     }
 }
 
-function writeFile(path, content) {
+const path = process.argv[2];
+
+console.log(`Выполнение программы: "${path}"`);
+const programCode = readFile(path);
+const prg = new Program(programCode);
+
+if (prg.programProcessing()) {
     try {
-        writeFileSync(path, content, 'latin1');
-        return true;
-    } catch (err) {
-        return err;
+        prg.programExecution();
+    } catch (e) {
+        console.error("ERROR:", e.message);
+        process.exit(1);
     }
 }
-
-
-let path = "2\\Cn.txt"
-let pathEnESC = "2\\out.txt"
-let pathDeESC = "2\\out1.txt"
-let pathEnJump = "2\\out2.txt"
-let pathDeJump = "2\\out3.txt"
-
-let s = readFile(path)
-const rle = new RLE(s, '#')
-
-let seens = rle.encodeESC()
-console.log(writeFile(pathEnESC, seens))
-console.log(writeFile(pathDeESC, rle.decodeESC(seens)))
-
-let sejump = rle.encodeJump(s)
-console.log(writeFile(pathEnJump, sejump))
-console.log(writeFile(pathDeJump, rle.decodeJump(sejump)))
- 

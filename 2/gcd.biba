@@ -7,11 +7,11 @@ input a
 input b
 
 loop:
-jz b end
-mod a b t
-mov a b
-mov b t
-jmp loop
+    jz b end
+    mod a b t
+    mov a b
+    mov b t
+    jmp loop
 
 end:
-output a
+    output a
