@@ -8,6 +8,5 @@ start:
     jmp end
 even:
     set 3 1
-    output 3
 end:
     output 3
