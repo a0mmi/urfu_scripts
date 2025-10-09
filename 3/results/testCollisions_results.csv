@@ -1,0 +1,46 @@
+file,pattern,kind,m,total_hash_hits,true_matches,collisions,time_s
+3/WarAndPeace/voyna_i_mir.txt,князь,sum,5,6077,949,5128,0.485000
+3/WarAndPeace/voyna_i_mir.txt,князь,sumsq,5,952,949,3,0.346000
+3/WarAndPeace/voyna_i_mir.txt,князь,poly,5,949,949,0,0.934000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей,sum,12,5799,509,5290,0.503000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей,sumsq,12,509,509,0,0.537000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей,poly,12,509,509,0,1.055000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей Балконский,sum,23,145,0,145,0.561000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей Балконский,sumsq,23,0,0,0,0.539000
+3/WarAndPeace/voyna_i_mir.txt,князь Андрей Балконский,poly,23,0,0,0,1.069000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь,sum,5,0,0,0,0.079000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь,sumsq,5,0,0,0,0.088000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь,poly,5,0,0,0,0.196000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей,sum,12,0,0,0,0.071000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей,sumsq,12,0,0,0,0.068000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей,poly,12,0,0,0,0.118000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей Балконский,sum,23,0,0,0,0.055000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей Балконский,sumsq,23,0,0,0,0.076000
+3/WarAndPeace/voyna-i-mir-tom-1.txt,князь Андрей Балконский,poly,23,0,0,0,0.173000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь,sum,5,0,0,0,0.070000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь,sumsq,5,0,0,0,0.109000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь,poly,5,0,0,0,0.163000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей,sum,12,0,0,0,0.070000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей,sumsq,12,0,0,0,0.085000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей,poly,12,0,0,0,0.210000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей Балконский,sum,23,0,0,0,0.130000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей Балконский,sumsq,23,0,0,0,0.052000
+3/WarAndPeace/voyna-i-mir-tom-2.txt,князь Андрей Балконский,poly,23,0,0,0,0.193000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь,sum,5,0,0,0,0.083000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь,sumsq,5,0,0,0,0.086000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь,poly,5,0,0,0,0.200000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей,sum,12,0,0,0,0.101000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей,sumsq,12,0,0,0,0.080000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей,poly,12,0,0,0,0.149000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей Балконский,sum,23,0,0,0,0.099000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей Балконский,sumsq,23,0,0,0,0.067000
+3/WarAndPeace/voyna-i-mir-tom-3.txt,князь Андрей Балконский,poly,23,0,0,0,0.141000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь,sum,5,0,0,0,0.072000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь,sumsq,5,0,0,0,0.051000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь,poly,5,0,0,0,0.122000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей,sum,12,0,0,0,0.043000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей,sumsq,12,0,0,0,0.062000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей,poly,12,0,0,0,0.096000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей Балконский,sum,23,0,0,0,0.045000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей Балконский,sumsq,23,0,0,0,0.044000
+3/WarAndPeace/voyna-i-mir-tom-4.txt,князь Андрей Балконский,poly,23,0,0,0,0.082000

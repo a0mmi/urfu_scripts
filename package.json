@@ -1,11 +1,14 @@
 {
   "name": "scripts",
   "version": "1.0.0",
-  "description": "ДЗ 1: Cn ->(encode ESC) out.txt ->(decode ESC) out1.txt ->(encode Jump) out2.txt -> (decode Jump) out3.txt |||(RLE)",
+  "description": "CHECK README",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "t3test1": "node 3/test1.js",
+    "t3test2": "node 3/test2.js",
+    "t3test3": "node 3/test3.js",
+    "t3testCollision" : "node 3/testCollision.js"
   },
   "repository": {
     "type": "git",
