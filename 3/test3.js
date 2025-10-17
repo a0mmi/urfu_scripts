@@ -46,7 +46,7 @@ for (const pat of patterns) {
       const t0 = nowMs();
       searchByHash(text, pat.s, kind);
       const t1 = nowMs();
-      timesH.push((t1-t0)/1000);
+      timesH.push((t1 - t0) / 1000);
     }
     rows.push({
       method: `hash(${kind})`,
@@ -59,10 +59,10 @@ for (const pat of patterns) {
   }
 }
 
-const header = "method,pattern,m,run1_s,run2_s,run3_s,run4_s,run5_s,mean_s,stddev_s";
+const header = "method, pattern, m, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s";
 const lines = [header];
 for (const r of rows) {
-  lines.push(`${r.method},${r.pattern},${r.m},${r.times.map(x=>x.toFixed(6)).join(",")},${r.mean.toFixed(6)},${r.stddev.toFixed(6)}`);
+  lines.push(`${r.method},${r.pattern},${r.m},${r.times.map(x => x.toFixed(6)).join(",")},${r.mean.toFixed(6)},${r.stddev.toFixed(6)}`);
 }
 fs.writeFileSync("3/results/test3_results.csv", lines.join("\n"));
 console.log("Wrote test3_results.csv");

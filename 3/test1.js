@@ -35,10 +35,10 @@ for (const file of files.slice(0,5)) {
   });
 }
 
-const csvLines = ["file, length, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s"];
+const csvLines = ["file, length, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s"]; // Standard Deviation
 for (const row of out) {
   csvLines.push(
-    `${row.file},${row.length},${row.times.map(x=>x.toFixed(6)).join(",")},${row.mean.toFixed(6)},${row.stddev.toFixed(6)}`
+    `${row.file},${row.length},${row.times.map(x => x.toFixed(6)).join(",")},${row.mean.toFixed(6)},${row.stddev.toFixed(6)}`
   );
 }
 fs.writeFileSync("3/results/test1_results.csv", csvLines.join("\n"));
