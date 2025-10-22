@@ -22,11 +22,11 @@ function writeFile(path, content) {
 }
 
 
-let path = "2\\Cn.txt"
-let pathEnESC = "2\\out.txt"
-let pathDeESC = "2\\out1.txt"
-let pathEnJump = "2\\out2.txt"
-let pathDeJump = "2\\out3.txt"
+let path = "1\\Cn.txt"
+let pathEnESC = "1\\out.txt"
+let pathDeESC = "1\\out1.txt"
+let pathEnJump = "1\\out2.txt"
+let pathDeJump = "1\\out3.txt"
 
 let s = readFile(path)
 const rle = new RLE(s, '#')
