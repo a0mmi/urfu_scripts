@@ -1,32 +1,76 @@
-import { readFile } from "./utils.js";
-import { bruteSearch } from "./brute.js";
-import { nowMs } from "./utils.js";
-import fs from "fs";
-import { files, pattern1, pattern2, pattern3 } from "./config.js";
+import { files, pattern1, pattern2, pattern3, test2path } from './config.js';
+import { readFile, nowMs, median, saveResults } from './utils.js';
+import { search } from './search.js';
 
-function mean(arr) {
-  return arr.reduce((a, b) => a + b, 0) / arr.length;
+console.log('Running Test 2...');
+
+const patterns = [
+{ name: 'pattern1', value: pattern1 },
+{ name: 'pattern2', value: pattern2 },
+{ name: 'pattern3', value: pattern3 }
+];
+
+const results = [];
+const methods = ['brute', 'sum', 'sumsq', 'poly'];
+
+// Отдельные тома
+for (const file of files) {
+    const text = readFile(file);
+    const fileSource = file.split('/').pop();
+
+    for (const { name, value } of patterns) {
+        for (const method of methods) {
+        const times = [];
+        let finalResult = null;
+        
+        for (let j = 0; j < 5; j++) {
+            const start = nowMs();
+            finalResult = search(text, value, method);
+            times.push(nowMs() - start);
+        }
+        
+        results.push({
+            test: 'test2',
+            file_source: fileSource,
+            pattern_name: name,
+            pattern: `"${value}"`,
+            method,
+            time_ms: median(times).toFixed(3),
+            matches_count: finalResult.matches_count,
+            false_positive_collisions: finalResult.falsePositives,
+            text_length: text.length,
+            pattern_length: value.length
+        });
+        }
+    }
 }
-function stddev(arr) {
-  const m = mean(arr);
-  return Math.sqrt(arr.reduce((s, x) => s + (x - m)**2, 0) / (arr.length - 1));
+
+// Все тома вместе
+const fullText = files.map(readFile).join('');
+for (const { name, value } of patterns) {
+    for (const method of methods) {
+        const times = [];
+        let finalResult = null;
+        
+        for (let j = 0; j < 5; j++) {
+        const start = nowMs();
+        finalResult = search(fullText, value, method);
+        times.push(nowMs() - start);
+        }
+        
+        results.push({
+        test: 'test2',
+        file_source: 'tome1-4',
+        pattern_name: name,
+        pattern: `"${value}"`,
+        method,
+        time_ms: median(times).toFixed(3),
+        matches_count: finalResult.matches_count,
+        false_positive_collisions: finalResult.falsePositives,
+        text_length: fullText.length,
+        pattern_length: value.length
+        });
+    }
 }
 
-const text = readFile(files[4]); // all.txt
-const runs = 5;
-const patterns = [pattern1, pattern2, pattern3];
-const csv = ["pattern, len, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s"];
-
-for (const p of patterns) {
-  const times = [];
-  for (let r = 0; r < runs; r++) {
-    const t0 = nowMs();
-    bruteSearch(text, p);
-    const t1 = nowMs();
-    times.push((t1 - t0) / 1000);
-  }
-  csv.push(`${p.replace(/,/g," ")} , ${p.length}, ${times.map(x => x.toFixed(6)).join(",")}, ${mean(times).toFixed(6)}, ${stddev(times).toFixed(6)}`);
-}
-
-fs.writeFileSync("3/results/test2_results.csv", csv.join("\n"));
-console.log("Wrote test2_results.csv");
+saveResults(test2path, results);

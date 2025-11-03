@@ -10,4 +10,6 @@ export const pattern1 = "князь";
 export const pattern2 = "князь Андрей"
 export const pattern3 = "князь Андрей Балконский"
 
-export const kinds = ["sum", "sumsq", "poly"];
+export const test1path = "3/results/test1.csv";
+export const test2path = "3/results/test2.csv";
+export const test3path = "3/results/test3.csv";

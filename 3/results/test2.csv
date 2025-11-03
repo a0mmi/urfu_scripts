@@ -1,0 +1,73 @@
+test,file_source,pattern_name,pattern,method,time_ms,matches_count,false_positive_collisions,text_length,pattern_length
+test2,voyna_i_mir.txt,pattern1,"""князь""",brute,24.000,949,0,3048016,5
+test2,voyna_i_mir.txt,pattern1,"""князь""",sum,31.000,949,5128,3048016,5
+test2,voyna_i_mir.txt,pattern1,"""князь""",sumsq,48.000,949,3,3048016,5
+test2,voyna_i_mir.txt,pattern1,"""князь""",poly,190.000,949,0,3048016,5
+test2,voyna_i_mir.txt,pattern2,"""князь Андрей""",brute,18.000,509,0,3048016,12
+test2,voyna_i_mir.txt,pattern2,"""князь Андрей""",sum,52.000,509,5290,3048016,12
+test2,voyna_i_mir.txt,pattern2,"""князь Андрей""",sumsq,53.000,509,0,3048016,12
+test2,voyna_i_mir.txt,pattern2,"""князь Андрей""",poly,209.000,509,0,3048016,12
+test2,voyna_i_mir.txt,pattern3,"""князь Андрей Балконский""",brute,24.000,0,0,3048016,23
+test2,voyna_i_mir.txt,pattern3,"""князь Андрей Балконский""",sum,53.000,0,145,3048016,23
+test2,voyna_i_mir.txt,pattern3,"""князь Андрей Балконский""",sumsq,56.000,0,0,3048016,23
+test2,voyna_i_mir.txt,pattern3,"""князь Андрей Балконский""",poly,206.000,0,0,3048016,23
+test2,voyna-i-mir-tom-1.txt,pattern1,"""князь""",brute,7.000,0,0,736089,5
+test2,voyna-i-mir-tom-1.txt,pattern1,"""князь""",sum,13.000,0,0,736089,5
+test2,voyna-i-mir-tom-1.txt,pattern1,"""князь""",sumsq,16.000,0,0,736089,5
+test2,voyna-i-mir-tom-1.txt,pattern1,"""князь""",poly,48.000,0,0,736089,5
+test2,voyna-i-mir-tom-1.txt,pattern2,"""князь Андрей""",brute,5.000,0,0,736089,12
+test2,voyna-i-mir-tom-1.txt,pattern2,"""князь Андрей""",sum,13.000,0,0,736089,12
+test2,voyna-i-mir-tom-1.txt,pattern2,"""князь Андрей""",sumsq,15.000,0,0,736089,12
+test2,voyna-i-mir-tom-1.txt,pattern2,"""князь Андрей""",poly,50.000,0,0,736089,12
+test2,voyna-i-mir-tom-1.txt,pattern3,"""князь Андрей Балконский""",brute,6.000,0,0,736089,23
+test2,voyna-i-mir-tom-1.txt,pattern3,"""князь Андрей Балконский""",sum,13.000,0,0,736089,23
+test2,voyna-i-mir-tom-1.txt,pattern3,"""князь Андрей Балконский""",sumsq,16.000,0,0,736089,23
+test2,voyna-i-mir-tom-1.txt,pattern3,"""князь Андрей Балконский""",poly,50.000,0,0,736089,23
+test2,voyna-i-mir-tom-2.txt,pattern1,"""князь""",brute,6.000,0,0,769418,5
+test2,voyna-i-mir-tom-2.txt,pattern1,"""князь""",sum,13.000,0,0,769418,5
+test2,voyna-i-mir-tom-2.txt,pattern1,"""князь""",sumsq,18.000,0,0,769418,5
+test2,voyna-i-mir-tom-2.txt,pattern1,"""князь""",poly,51.000,0,0,769418,5
+test2,voyna-i-mir-tom-2.txt,pattern2,"""князь Андрей""",brute,6.000,0,0,769418,12
+test2,voyna-i-mir-tom-2.txt,pattern2,"""князь Андрей""",sum,14.000,0,0,769418,12
+test2,voyna-i-mir-tom-2.txt,pattern2,"""князь Андрей""",sumsq,16.000,0,0,769418,12
+test2,voyna-i-mir-tom-2.txt,pattern2,"""князь Андрей""",poly,54.000,0,0,769418,12
+test2,voyna-i-mir-tom-2.txt,pattern3,"""князь Андрей Балконский""",brute,6.000,0,0,769418,23
+test2,voyna-i-mir-tom-2.txt,pattern3,"""князь Андрей Балконский""",sum,13.000,0,0,769418,23
+test2,voyna-i-mir-tom-2.txt,pattern3,"""князь Андрей Балконский""",sumsq,16.000,0,0,769418,23
+test2,voyna-i-mir-tom-2.txt,pattern3,"""князь Андрей Балконский""",poly,54.000,0,0,769418,23
+test2,voyna-i-mir-tom-3.txt,pattern1,"""князь""",brute,6.000,0,0,843205,5
+test2,voyna-i-mir-tom-3.txt,pattern1,"""князь""",sum,14.000,0,0,843205,5
+test2,voyna-i-mir-tom-3.txt,pattern1,"""князь""",sumsq,17.000,0,0,843205,5
+test2,voyna-i-mir-tom-3.txt,pattern1,"""князь""",poly,54.000,0,0,843205,5
+test2,voyna-i-mir-tom-3.txt,pattern2,"""князь Андрей""",brute,7.000,0,0,843205,12
+test2,voyna-i-mir-tom-3.txt,pattern2,"""князь Андрей""",sum,15.000,0,0,843205,12
+test2,voyna-i-mir-tom-3.txt,pattern2,"""князь Андрей""",sumsq,18.000,0,0,843205,12
+test2,voyna-i-mir-tom-3.txt,pattern2,"""князь Андрей""",poly,58.000,0,0,843205,12
+test2,voyna-i-mir-tom-3.txt,pattern3,"""князь Андрей Балконский""",brute,6.000,0,0,843205,23
+test2,voyna-i-mir-tom-3.txt,pattern3,"""князь Андрей Балконский""",sum,20.000,0,0,843205,23
+test2,voyna-i-mir-tom-3.txt,pattern3,"""князь Андрей Балконский""",sumsq,17.000,0,0,843205,23
+test2,voyna-i-mir-tom-3.txt,pattern3,"""князь Андрей Балконский""",poly,57.000,0,0,843205,23
+test2,voyna-i-mir-tom-4.txt,pattern1,"""князь""",brute,5.000,0,0,697940,5
+test2,voyna-i-mir-tom-4.txt,pattern1,"""князь""",sum,12.000,0,0,697940,5
+test2,voyna-i-mir-tom-4.txt,pattern1,"""князь""",sumsq,14.000,0,0,697940,5
+test2,voyna-i-mir-tom-4.txt,pattern1,"""князь""",poly,45.000,0,0,697940,5
+test2,voyna-i-mir-tom-4.txt,pattern2,"""князь Андрей""",brute,5.000,0,0,697940,12
+test2,voyna-i-mir-tom-4.txt,pattern2,"""князь Андрей""",sum,12.000,0,0,697940,12
+test2,voyna-i-mir-tom-4.txt,pattern2,"""князь Андрей""",sumsq,14.000,0,0,697940,12
+test2,voyna-i-mir-tom-4.txt,pattern2,"""князь Андрей""",poly,48.000,0,0,697940,12
+test2,voyna-i-mir-tom-4.txt,pattern3,"""князь Андрей Балконский""",brute,5.000,0,0,697940,23
+test2,voyna-i-mir-tom-4.txt,pattern3,"""князь Андрей Балконский""",sum,12.000,0,0,697940,23
+test2,voyna-i-mir-tom-4.txt,pattern3,"""князь Андрей Балконский""",sumsq,14.000,0,0,697940,23
+test2,voyna-i-mir-tom-4.txt,pattern3,"""князь Андрей Балконский""",poly,47.000,0,0,697940,23
+test2,tome1-4,pattern1,"""князь""",brute,36.000,949,0,6094668,5
+test2,tome1-4,pattern1,"""князь""",sum,100.000,949,5128,6094668,5
+test2,tome1-4,pattern1,"""князь""",sumsq,116.000,949,3,6094668,5
+test2,tome1-4,pattern1,"""князь""",poly,384.000,949,0,6094668,5
+test2,tome1-4,pattern2,"""князь Андрей""",brute,35.000,509,0,6094668,12
+test2,tome1-4,pattern2,"""князь Андрей""",sum,100.000,509,5290,6094668,12
+test2,tome1-4,pattern2,"""князь Андрей""",sumsq,117.000,509,0,6094668,12
+test2,tome1-4,pattern2,"""князь Андрей""",poly,411.000,509,0,6094668,12
+test2,tome1-4,pattern3,"""князь Андрей Балконский""",brute,35.000,0,0,6094668,23
+test2,tome1-4,pattern3,"""князь Андрей Балконский""",sum,102.000,0,145,6094668,23
+test2,tome1-4,pattern3,"""князь Андрей Балконский""",sumsq,115.000,0,0,6094668,23
+test2,tome1-4,pattern3,"""князь Андрей Балконский""",poly,406.000,0,0,6094668,23

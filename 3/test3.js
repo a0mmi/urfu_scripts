@@ -1,68 +1,47 @@
-import { bruteSearch } from "./brute.js";
-import { searchByHash } from "./searchers.js";
-import { nowMs } from "./utils.js";
-import fs from "fs";
-import { kinds } from "./config.js";
+import { test3path } from './config.js';
+import { readFile, nowUs, median, saveResults } from './utils.js';
+import { search } from './search.js';
 
-function mean(arr) {
-  return arr.reduce((a,b)=>a+b,0)/arr.length;
-}
-function stddev(arr) {
-  const m = mean(arr);
-  return Math.sqrt(arr.reduce((s,x)=>s+(x-m)**2,0)/(arr.length-1));
-}
 
-const n = 1_000_000;
-const text = "a".repeat(n);
-const patterns = [
-  {name: "a^100", s: "a".repeat(100)},
-  {name: "a^50+b+a^49", s: "a".repeat(50) + "b" + "a".repeat(49)},
-  {name: "(ab)^50", s: ("ab").repeat(50)}
+console.log('Running Test 3...');
+
+const text1 = 'a'.repeat(100) + 'b';
+const text2 = 'b' + 'a'.repeat(100);
+const pattern1 = 'a'.repeat(100) + 'b';
+const pattern2 = 'b' + 'a'.repeat(100);
+
+const tests = [
+{ text: text1, pattern: pattern1, name: 'a^100b' },
+{ text: text2, pattern: pattern2, name: 'ba^100' }
 ];
 
-const runs = 5;
-const rows = [];
-for (const pat of patterns) {
-  // brute
-  const timesBrute = [];
-  for (let r=0;r<runs;r++) {
-    const t0 = nowMs();
-    bruteSearch(text, pat.s);
-    const t1 = nowMs();
-    timesBrute.push((t1-t0)/1000);
-  }
-  rows.push({
-    method: "brute",
-    pattern: pat.name,
-    m: pat.s.length,
-    times: timesBrute,
-    mean: mean(timesBrute),
-    stddev: stddev(timesBrute)
-  });
+const results = [];
+const methods = ['brute', 'sum', 'sumsq', 'poly'];
 
-  for (const kind of kinds) {
-    const timesH = [];
-    for (let r=0;r<runs;r++) {
-      const t0 = nowMs();
-      searchByHash(text, pat.s, kind);
-      const t1 = nowMs();
-      timesH.push((t1 - t0) / 1000);
+for (const { text, pattern, name } of tests) {
+    for (const method of methods) {
+        const times = [];
+        let finalResult = null;
+        
+        for (let j = 0; j < 100; j++) {
+            const start = nowUs(); // Микросекунды (поменял с миллисекунд)
+            finalResult = search(text, pattern, method);
+            times.push(nowUs() - start);
+        }
+        
+        results.push({
+        test: 'test3',
+        file_source: name,
+        pattern_name: name,
+        pattern: `"${pattern}"`,
+        method,
+        time_us: median(times).toFixed(2),
+        matches_count: finalResult.matches_count,
+        false_positive_collisions: finalResult.falsePositives,
+        text_length: text.length,
+        pattern_length: pattern.length,
+        });
     }
-    rows.push({
-      method: `hash(${kind})`,
-      pattern: pat.name,
-      m: pat.s.length,
-      times: timesH,
-      mean: mean(timesH),
-      stddev: stddev(timesH)
-    });
-  }
 }
 
-const header = "method, pattern, m, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s";
-const lines = [header];
-for (const r of rows) {
-  lines.push(`${r.method},${r.pattern},${r.m},${r.times.map(x => x.toFixed(6)).join(",")},${r.mean.toFixed(6)},${r.stddev.toFixed(6)}`);
-}
-fs.writeFileSync("3/results/test3_results.csv", lines.join("\n"));
-console.log("Wrote test3_results.csv");
+saveResults(test3path, results);

@@ -7,8 +7,7 @@
   "scripts": {
     "t3test1": "node 3/test1.js",
     "t3test2": "node 3/test2.js",
-    "t3test3": "node 3/test3.js",
-    "t3testCollision" : "node 3/testCollision.js"
+    "t3test3": "node 3/test3.js"
   },
   "repository": {
     "type": "git",

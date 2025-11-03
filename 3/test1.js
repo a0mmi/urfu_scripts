@@ -1,45 +1,41 @@
-import { readFile } from "./utils.js";
-import { bruteSearch } from "./brute.js";
-import { files } from "./config.js";
-import { nowMs } from "./utils.js";
-import fs from "fs";
+import { files, pattern2, test1path } from './config.js';
+import { readFile, nowMs, median, saveResults } from './utils.js';
+import { search } from './search.js';
 
-function mean(arr) {
-  return arr.reduce((a, b) => a + b, 0) / arr.length;
+
+console.log('Running Test 1...');
+
+let text = '';
+const results = [];
+const methods = ['brute', 'sum', 'sumsq', 'poly'];
+
+for (let i = 0; i < files.length; i++) {
+    text += readFile(files[i]);
+    const fileSource = `tome1-${i + 1}`;
+
+    for (const method of methods) {
+        const times = [];
+        let finalResult = null;
+        
+        for (let j = 0; j < 5; j++) {
+        const start = nowMs();
+        finalResult = search(text, pattern2, method);
+        times.push(nowMs() - start);
+        }
+        
+        results.push({
+        test: 'test1',
+        file_source: fileSource,
+        pattern_name: 'pattern2',
+        pattern: `"${pattern2}"`,
+        method,
+        time_ms: median(times).toFixed(3),
+        matches_count: finalResult.matches_count,
+        false_positive_collisions: finalResult.falsePositives,
+        text_length: text.length,
+        pattern_length: pattern2.length
+        });
+    }
 }
 
-function stddev(arr) {
-  const m = mean(arr);
-  return Math.sqrt(arr.reduce((s, x) => s + (x - m)**2, 0) / (arr.length - 1));
-}
-
-const pattern = "князь Андрей";
-const runs = 5;
-const out = [];
-for (const file of files.slice(0,5)) {
-  const s = readFile(file);
-  const n = s.length;
-  const times = [];
-  for (let r = 0; r < runs; r++) {
-    const t0 = nowMs();
-    bruteSearch(s, pattern);
-    const t1 = nowMs();
-    times.push((t1 - t0) / 1000); // seconds
-  }
-  out.push({
-    file,
-    length: n,
-    times,
-    mean: mean(times),
-    stddev: stddev(times)
-  });
-}
-
-const csvLines = ["file, length, run1_s, run2_s, run3_s, run4_s, run5_s, mean_s, stddev_s"]; // Standard Deviation
-for (const row of out) {
-  csvLines.push(
-    `${row.file},${row.length},${row.times.map(x => x.toFixed(6)).join(",")},${row.mean.toFixed(6)},${row.stddev.toFixed(6)}`
-  );
-}
-fs.writeFileSync("3/results/test1_results.csv", csvLines.join("\n"));
-console.log("Wrote test1_results.csv");
+saveResults(test1path, results);

@@ -1,0 +1,21 @@
+test,file_source,pattern_name,pattern,method,time_ms,matches_count,false_positive_collisions,text_length,pattern_length
+test1,tome1-1,pattern2,"""князь Андрей""",brute,34.000,509,0,3048016,12
+test1,tome1-1,pattern2,"""князь Андрей""",sum,15.000,509,5290,3048016,12
+test1,tome1-1,pattern2,"""князь Андрей""",sumsq,52.000,509,0,3048016,12
+test1,tome1-1,pattern2,"""князь Андрей""",poly,205.000,509,0,3048016,12
+test1,tome1-2,pattern2,"""князь Андрей""",brute,30.000,509,0,3784105,12
+test1,tome1-2,pattern2,"""князь Андрей""",sum,83.000,509,5290,3784105,12
+test1,tome1-2,pattern2,"""князь Андрей""",sumsq,80.000,509,0,3784105,12
+test1,tome1-2,pattern2,"""князь Андрей""",poly,259.000,509,0,3784105,12
+test1,tome1-3,pattern2,"""князь Андрей""",brute,38.000,509,0,4553523,12
+test1,tome1-3,pattern2,"""князь Андрей""",sum,94.000,509,5290,4553523,12
+test1,tome1-3,pattern2,"""князь Андрей""",sumsq,100.000,509,0,4553523,12
+test1,tome1-3,pattern2,"""князь Андрей""",poly,312.000,509,0,4553523,12
+test1,tome1-4,pattern2,"""князь Андрей""",brute,51.000,509,0,5396728,12
+test1,tome1-4,pattern2,"""князь Андрей""",sum,108.000,509,5290,5396728,12
+test1,tome1-4,pattern2,"""князь Андрей""",sumsq,103.000,509,0,5396728,12
+test1,tome1-4,pattern2,"""князь Андрей""",poly,269.000,509,0,5396728,12
+test1,tome1-5,pattern2,"""князь Андрей""",brute,36.000,509,0,6094668,12
+test1,tome1-5,pattern2,"""князь Андрей""",sum,105.000,509,5290,6094668,12
+test1,tome1-5,pattern2,"""князь Андрей""",sumsq,102.000,509,0,6094668,12
+test1,tome1-5,pattern2,"""князь Андрей""",poly,441.000,509,0,6094668,12
