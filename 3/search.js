@@ -72,7 +72,7 @@ export function search(text, pattern, method, options = {}) {
 
   // Настройки по умолчанию для полиномиального хеша
   const p = options.p || 31;
-  const mod = options.mod || 1000000007;
+  const mod = options.mod || (1e9 + 7);
   
   // Вычисляем хеш паттерна
   const patternHash = 
