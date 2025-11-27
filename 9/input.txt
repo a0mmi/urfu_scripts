@@ -1,6 +1,0 @@
-In JavaScript, there are multiple ways in which we can assign the value of one object to another.
-Sometimes we do not know the exact number of arguments that are to be assigned. In this case, the triple dots are used.
-The triple dots are known as the spread operator, which takes an iterable(array, string, or object) and expands the iterable to individual values.
-The spread operator is useful as it reduces the amount of code to be written and increases its readability. 
-The syntax of the spread operator is the same as the rest parameter but the working is different.
-It was introduced as a feature in ES6 JavaScript
