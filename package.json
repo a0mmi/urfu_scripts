@@ -9,8 +9,8 @@
     "t3test2": "node 3/test2.js",
     "t3test3": "node 3/test3.js",
     "entrophy": "node 5/app.js",
-    "huffman": "node 8/node/app.js",
-    "reverse_polish_notation": "node 9/app.js"
+    "reverse_polish_notation": "node 9/app.js",
+    "caesar_cipher" : "node 10/app.js"
   },
   "repository": {
     "type": "git",

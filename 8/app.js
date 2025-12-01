@@ -49,17 +49,53 @@ function buildLeafNodes(s) {
     return nodes;
 }
 
-function popTwoLowest(nodes) {
-    // Сортировка по частоте, длине строки, лексикографически
-    nodes.sort(function(a, b) {
-        if (a.freq !== b.freq) return a.freq - b.freq;
-        if (a.str.length !== b.str.length) return a.str.length - b.str.length;
-        return (a.str < b.str) ? -1 : ((a.str > b.str) ? 1 : 0);
-    });
-    var a = nodes.shift();
-    var b = nodes.shift();
-    return [a,b];
+// Компаратуршка
+function compareNodes(a, b) {
+    if (a.freq !== b.freq) return a.freq - b.freq;
+    if (a.str.length !== b.str.length) return a.str.length - b.str.length;
+    if (a.str < b.str) return -1;
+    if (a.str > b.str) return 1;
+    return 0;
 }
+
+// Линейный поиск двух минимальных узлов
+function popTwoLowest(nodes) {
+    var len = nodes.length;
+    if (len === 0) return [];
+    if (len === 1) return [nodes.shift()];
+
+    var min1 = 0, min2 = 1;
+    if (compareNodes(nodes[min2], nodes[min1]) < 0) {
+        var t = min1; min1 = min2; min2 = t;
+    }
+
+    for (var i = 2; i < len; i++) {
+        var cmpToMin1 = compareNodes(nodes[i], nodes[min1]);
+        if (cmpToMin1 < 0) {
+            min2 = min1;
+            min1 = i;
+        } else {
+            if (compareNodes(nodes[i], nodes[min2]) < 0) {
+                min2 = i;
+            }
+        }
+    }
+
+    var a = nodes[min1];
+    var b = nodes[min2];
+
+    // Создаем новый массив без элементов min1 и min2
+    var newNodes = [];
+    for (var j = 0; j < len; j++) {
+        if (j !== min1 && j !== min2) newNodes.push(nodes[j]);
+    }
+
+    // Заменяем содержимое nodes на newNodes
+    nodes.length = 0;
+    for (var k = 0; k < newNodes.length; k++) nodes.push(newNodes[k]);
+    return [a, b];
+}
+
 
 // Сборка дерева Хафмана
 function buildHuffmanTree(s) {
