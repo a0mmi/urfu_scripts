@@ -1,7 +1,4 @@
-function die(msg, code = 1) {
-  console.error('Error:', msg);
-  process.exit(code);
-}
+import { die } from './utils.js'
 
 const prec = { '^': 4, '*': 3, '/': 3, '+': 2, '-': 2 };
 const assoc = { '^': 'right', '*': 'left', '/': 'left', '+': 'left', '-': 'left' };

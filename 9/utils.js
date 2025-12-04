@@ -1,4 +1,7 @@
-import { die } from './app.js';
+export function die(msg, code = 1) {
+  console.error('Error:', msg);
+  process.exit(code);
+}
 
 export function preprocessText(rawText) {
   const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);

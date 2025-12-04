@@ -1,11 +1,6 @@
 import fs from 'fs';
 import { infixToRPN, evalRPN, rpnToString } from './rpn.js';
-import { preprocessText, parseAssignments, tokenize } from './utils.js';
-
-export function die(msg, code = 1) {
-  console.error('Error:', msg);
-  process.exit(code);
-}
+import { preprocessText, parseAssignments, tokenize, die } from './utils.js';
 
 function parseArg(argv) {
   if (argv.length < 3) die('Usage: node rpn.js @file:input.txt   (or node rpn.js input.txt)');
