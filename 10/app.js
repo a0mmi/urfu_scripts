@@ -74,4 +74,3 @@ function main(argv) {
 }
 
 main(process.argv);
-export { main };
