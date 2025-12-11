@@ -1,35 +1,156 @@
-import fs from 'fs';
-import { infixToRPN, evalRPN, rpnToString } from './rpn.js';
-import { preprocessText, parseAssignments, tokenize, die } from './utils.js';
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+var args = WScript.Arguments;
+if (args.Length < 1) {
+    WScript.Echo("Использование: cscript script.js <имя_файла>");
+    WScript.Quit(1);
+}
+var file = fso.OpenTextFile(args(0), 1);
+var content = file.ReadAll();
+file.Close();
 
-function parseArg(argv) {
-  if (argv.length < 3) die('Usage: node rpn.js @file:input.txt   (or node rpn.js input.txt)');
-  const raw = argv[2];
-  return raw.startsWith('@file:') ? raw.slice(6) : raw;
+// Разбиваем на строки, удаляем пустые и обрезаем пробелы
+var rawLines = content.split("\n");
+var lines = [];
+for (var i = 0; i < rawLines.length; i++) {
+    var line = rawLines[i].replace(/^\s+|\s+$/g, "");
+    if (line !== "") lines.push(line);
 }
 
-function readInputFile(filename) {
-  if (!filename) die('Empty filename provided');
-  if (!fs.existsSync(filename)) die('File not found: ' + filename);
-  const txt = fs.readFileSync(filename, 'utf8');
-  if (!txt) die('Empty input file');
-  return txt;
+// Первая строка – выражение (удаляем кавычки, если есть)
+var expr = lines[0].replace(/['"]/g, "");
+
+// Остальные строки – присваивания переменным: имя и значение
+var vars = {};
+for (var i = 1; i < lines.length; i++) {
+    var parts = lines[i].replace(/['"]/g, "").split(/\s+/);
+    var name = parts[0];
+    var value = parseFloat(parts.slice(1).join(" "));
+    vars[name] = value;
 }
 
-function main(argv) {
-  const filename = parseArg(argv);
-  const raw = readInputFile(filename);
-  const lines = preprocessText(raw);
-  const exprLine = lines[0];
-  const vars = parseAssignments(lines);
-
-  const tokens = tokenize(exprLine);
-  const rpn = infixToRPN(tokens);
-  const result = evalRPN(rpn, vars);
-
-  console.log('Infix:   ', exprLine);
-  console.log('Postfix: ', rpnToString(rpn));
-  console.log('Result:  ', result);
+// Функция токенизации выражения (числа, идентификаторы, операторы)
+function tokenize(str) {
+    var tokens = [];
+    var i = 0;
+    while (i < str.length) {
+        var ch = str.charAt(i);
+        if (/\s/.test(ch)) { i++; continue; }
+        // число (включая десятичную точку)
+        if (/[0-9.]/.test(ch)) {
+            var j = i;
+            while (j < str.length && /[0-9.]/.test(str.charAt(j))) j++;
+            var num = str.substring(i, j);
+            tokens.push({type: "number", value: num});
+            i = j;
+            continue;
+        }
+        // идентификатор (переменная)
+        if (/[A-Za-z_]/.test(ch)) {
+            var j = i;
+            while (j < str.length && /[A-Za-z0-9_]/.test(str.charAt(j))) j++;
+            tokens.push({type: "ident", value: str.substring(i, j)});
+            i = j;
+            continue;
+        }
+        // оператор или скобка
+        if ("+-*/^()".indexOf(ch) >= 0) {
+            tokens.push({type: "op", value: ch});
+            i++;
+            continue;
+        }
+        // непризнанный символ – пропускаем
+        i++;
+    }
+    return tokens;
 }
 
-main(process.argv);
+// Преобразование инфиксного списка токенов в RPN (алгоритм "сортировочная станция")
+function infixToRPN(tokens) {
+    var prec = {'^':4,'*':3,'/':3,'+':2,'-':2};
+    var assoc = {'^':"right",'+' :"left",'-':"left",'*':"left",'/' :"left"};
+    var out = [];
+    var ops = [];
+    for (var i = 0; i < tokens.length; i++) {
+        var t = tokens[i];
+        if (t.type === "number" || t.type === "ident") {
+            out.push(t);
+            continue;
+        }
+        if (t.value === "(") {
+            ops.push(t.value);
+            continue;
+        }
+        if (t.value === ")") {
+            while (ops.length && ops[ops.length-1] !== "(") {
+                out.push({type: "op", value: ops.pop()});
+            }
+            ops.pop(); // удаляем "("
+            continue;
+        }
+        // оператор + - * / ^
+        while (ops.length) {
+            var top = ops[ops.length - 1];
+            if (top === "(") break;
+            var topPrec = prec[top] || 0;
+            var currPrec = prec[t.value] || 0;
+            if ((assoc[t.value] === "left"  && currPrec <= topPrec) ||
+                (assoc[t.value] === "right" && currPrec <  topPrec)) {
+                out.push({type: "op", value: ops.pop()});
+            } else {
+                break;
+            }
+        }
+        ops.push(t.value);
+    }
+    // выталкиваем оставшиеся операторы
+    while (ops.length) {
+        out.push({type: "op", value: ops.pop()});
+    }
+    return out;
+}
+
+// Вычисление RPN-выражения с учётом значений переменных
+function evalRPN(rpn, vars) {
+    var st = [];
+    for (var i = 0; i < rpn.length; i++) {
+        var tok = rpn[i];
+        if (tok.type === "number") {
+            st.push(parseFloat(tok.value));
+        }
+        else if (tok.type === "ident") {
+            st.push(vars[tok.value]);
+        }
+        else { // оператор
+            var b = st.pop();
+            var a = st.pop();
+            switch (tok.value) {
+                case "+": st.push(a + b); break;
+                case "-": st.push(a - b); break;
+                case "*": st.push(a * b); break;
+                case "/": st.push(a / b); break;
+                case "^": st.push(Math.pow(a, b)); break;
+            }
+        }
+    }
+    return st[0];
+}
+
+// Помощь для печати RPN-массива как строки
+function rpnToString(rpn) {
+    var parts = [];
+    for (var i = 0; i < rpn.length; i++) {
+        parts.push(rpn[i].value);
+    }
+    return parts.join(" ");
+}
+
+// main
+(function main() {
+    var tokens = tokenize(expr);
+    var rpn = infixToRPN(tokens);
+    var result = evalRPN(rpn, vars);
+
+    WScript.Echo("Infix:   " + expr);
+    WScript.Echo("Postfix: " + rpnToString(rpn));
+    WScript.Echo("Result:  " + result);
+})();
