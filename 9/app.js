@@ -1,41 +1,12 @@
-var fso = new ActiveXObject("Scripting.FileSystemObject");
-var args = WScript.Arguments;
-if (args.Length < 1) {
-    WScript.Echo("Использование: cscript script.js <имя_файла>");
-    WScript.Quit(1);
-}
-var file = fso.OpenTextFile(args(0), 1);
-var content = file.ReadAll();
-file.Close();
 
-// Разбиваем на строки, удаляем пустые и обрезаем пробелы
-var rawLines = content.split("\n");
-var lines = [];
-for (var i = 0; i < rawLines.length; i++) {
-    var line = rawLines[i].replace(/^\s+|\s+$/g, "");
-    if (line !== "") lines.push(line);
-}
-
-// Первая строка – выражение (удаляем кавычки, если есть)
-var expr = lines[0].replace(/['"]/g, "");
-
-// Остальные строки – присваивания переменным: имя и значение
-var vars = {};
-for (var i = 1; i < lines.length; i++) {
-    var parts = lines[i].replace(/['"]/g, "").split(/\s+/);
-    var name = parts[0];
-    var value = parseFloat(parts.slice(1).join(" "));
-    vars[name] = value;
-}
-
-// Функция токенизации выражения (числа, идентификаторы, операторы)
+// (числа, идентификаторы, операторы)
 function tokenize(str) {
     var tokens = [];
     var i = 0;
     while (i < str.length) {
         var ch = str.charAt(i);
         if (/\s/.test(ch)) { i++; continue; }
-        // число (включая десятичную точку)
+        // число+десятые
         if (/[0-9.]/.test(ch)) {
             var j = i;
             while (j < str.length && /[0-9.]/.test(str.charAt(j))) j++;
@@ -44,7 +15,7 @@ function tokenize(str) {
             i = j;
             continue;
         }
-        // идентификатор (переменная)
+        // переменные
         if (/[A-Za-z_]/.test(ch)) {
             var j = i;
             while (j < str.length && /[A-Za-z0-9_]/.test(str.charAt(j))) j++;
@@ -63,6 +34,15 @@ function tokenize(str) {
     }
     return tokens;
 }
+// [
+//   {type:"op", value:"("},
+//   {type:"ident", value:"a"},
+//   {type:"op", value:"+"},
+//   {type:"ident", value:"b"},
+//   {type:"op", value:")"},
+//   {type:"op", value:"*"},
+//   {type:"number", value:"2"}
+// ]
 
 // Преобразование инфиксного списка токенов в RPN (алгоритм "сортировочная станция")
 function infixToRPN(tokens) {
@@ -84,7 +64,7 @@ function infixToRPN(tokens) {
             while (ops.length && ops[ops.length-1] !== "(") {
                 out.push({type: "op", value: ops.pop()});
             }
-            ops.pop(); // удаляем "("
+            ops.pop(); // del "("
             continue;
         }
         // оператор + - * / ^
@@ -146,6 +126,33 @@ function rpnToString(rpn) {
 
 // main
 (function main() {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var args = WScript.Arguments;
+    if (args.Length < 1) {
+        WScript.Echo("Использование: cscript script.js <имя_файла>");
+        WScript.Quit(1);
+    }
+    var file = fso.OpenTextFile(args(0), 1);
+    var content = file.ReadAll();
+    file.Close();
+
+    var rawLines = content.split("\n");
+    var lines = [];
+    for (var i = 0; i < rawLines.length; i++) {
+        var line = rawLines[i].replace(/^\s+|\s+$/g, "");
+        if (line !== "") lines.push(line);
+    }
+
+    var expr = lines[0];
+
+    var vars = {};
+    for (var i = 1; i < lines.length; i++) {
+        var parts = lines[i].replace(/['"]/g, "").split(/\s+/);
+        var name = parts[0];
+        var value = parseFloat(parts.slice(1).join(" "));
+        vars[name] = value;
+    }
+
     var tokens = tokenize(expr);
     var rpn = infixToRPN(tokens);
     var result = evalRPN(rpn, vars);

@@ -15,6 +15,9 @@ var DEFAULT_FREQ = {
 
 var ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
+var indexMap = buildIndexMap(ALPHABET);
+var alphaLen = ALPHABET.length;
+
 // Для работы с файлами
 function resolvePath(relPath) {
   var fso = new ActiveXObject("Scripting.FileSystemObject");
@@ -53,9 +56,6 @@ function buildIndexMap(alphabet) {
   for (var i = 0; i < alphabet.length; i++) map[alphabet.charAt(i)] = i;
   return map;
 }
-
-var indexMap = buildIndexMap(ALPHABET);
-var alphaLen = ALPHABET.length;
 
 function mod(n, m) {
   return ((n % m) + m) % m;
