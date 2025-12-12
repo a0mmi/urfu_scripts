@@ -44,7 +44,7 @@ function tokenize(str) {
 //   {type:"number", value:"2"}
 // ]
 
-// Преобразование инфиксного списка токенов в RPN (алгоритм "сортировочная станция")
+// Shunting yard
 function infixToRPN(tokens) {
     var prec = {'^':4,'*':3,'/':3,'+':2,'-':2};
     var assoc = {'^':"right",'+' :"left",'-':"left",'*':"left",'/' :"left"};
@@ -64,6 +64,9 @@ function infixToRPN(tokens) {
             while (ops.length && ops[ops.length-1] !== "(") {
                 out.push({type: "op", value: ops.pop()});
             }
+            if (!ops.length) {
+                throw new Error("Unmatched closing parenthesis at position " + t.pos); // Не нашли закрывающеюся скобку
+            }
             ops.pop(); // del "("
             continue;
         }
@@ -76,6 +79,14 @@ function infixToRPN(tokens) {
             if ((assoc[t.value] === "left"  && currPrec <= topPrec) ||
                 (assoc[t.value] === "right" && currPrec <  topPrec)) {
                 out.push({type: "op", value: ops.pop()});
+                // Для лево-ассоциативных операторов (например -, *): 
+                // если текущий оператор имеет приоритет меньше или равный
+                // приоритету верхнего оператора в стеке — то верхний должен быть сначала
+                // вынесен в выход (поскольку у него не меньше приоритет и он должен выполняться раньше).
+
+                // Для право-ассоциативных операторов (^): если текущий оператор имеет
+                // приоритет строго меньше приоритета верхнего, то верхний вытесняется;
+                // если равен — не вытесняется.
             } else {
                 break;
             }
@@ -84,7 +95,9 @@ function infixToRPN(tokens) {
     }
     // выталкиваем оставшиеся операторы
     while (ops.length) {
-        out.push({type: "op", value: ops.pop()});
+        var top = ops.pop();
+        if (top === "(") throw new Error("Unmatched opening parenthesis"); // Ошибка на скобках
+        out.push({type: "op", value: top});
     }
     return out;
 }
@@ -103,11 +116,19 @@ function evalRPN(rpn, vars) {
         else { // оператор
             var b = st.pop();
             var a = st.pop();
+            /* Сначала берётся b, потом a. Это нужно для правильной семантики бинарных операторов:
+            в RPN выражение a b - означает a - b.
+            */
             switch (tok.value) {
                 case "+": st.push(a + b); break;
                 case "-": st.push(a - b); break;
                 case "*": st.push(a * b); break;
-                case "/": st.push(a / b); break;
+                case "/": 
+                    if (b === 0) {
+                        throw new Error("Division by zero");
+                    }
+                    st.push(a / b);
+                    break;
                 case "^": st.push(Math.pow(a, b)); break;
             }
         }
