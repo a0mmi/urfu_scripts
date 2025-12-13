@@ -29,7 +29,6 @@ function tokenize(str) {
             i++;
             continue;
         }
-        // непризнанный символ – пропускаем
         i++;
     }
     return tokens;
