@@ -1,5 +1,3 @@
-
-
 # Карточка 1
 
 **Лицевая сторона:**
@@ -304,7 +302,12 @@
 
 Пример входного файла:
 
-<pre class="qwen-markdown-code"><div class="qwen-markdown-code-header"><div></div><div class="qwen-markdown-code-header-actions"><div class="qwen-markdown-code-header-action-item" aria-describedby="«r1op»"><span role="img" class="anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><use xlink:href="https://chat.qwen.ai/c/2a825fb6-0c5d-4236-8fd6-69ff80bdeab0#icon-line-copy-right"></use></svg></span></div><div class="qwen-markdown-code-header-action-item" aria-describedby="«r1or»"><span role="img" class="anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><use xlink:href="https://chat.qwen.ai/c/2a825fb6-0c5d-4236-8fd6-69ff80bdeab0#icon-line-download-02"></use></svg></span></div></div></div><div class="qwen-markdown-code-body"><section><div data-keybinding-context="43" data-mode-id="plaintext"><div class="monaco-editor no-user-select  showUnused showDeprecated vs-dark" role="code" data-uri="inmemory://model/43"><div data-mprt="3" class="overflow-guard"><div class="margin" role="presentation" aria-hidden="true"><div class="glyph-margin"></div><div class="margin-view-zones" role="presentation" aria-hidden="true"></div><div class="margin-view-overlays" role="presentation" aria-hidden="true"><div><div class="current-line current-line-margin-both"></div><div class="line-numbers active-line-number">1</div></div><div><div class="line-numbers">2</div></div><div><div class="line-numbers">3</div></div><div><div class="line-numbers">4</div></div></div><div class="glyph-margin-widgets"></div></div><div class="monaco-scrollable-element editor-scrollable vs-dark" role="presentation" data-mprt="6"><div role="presentation" aria-hidden="true" class="invisible scrollbar horizontal"><div class="slider"></div></div><div role="presentation" aria-hidden="true" class="invisible scrollbar vertical"><div class="slider"></div></div></div><div role="presentation" aria-hidden="true"></div><textarea data-mprt="7" class="inputarea monaco-mouse-cursor-text" wrap="off" autocorrect="off" autocapitalize="none" autocomplete="off" spellcheck="false" aria-label="Editor content" aria-required="false" tabindex="0" role="textbox" aria-roledescription="editor" aria-multiline="true" aria-autocomplete="none"></textarea><div class="monaco-editor-background textAreaCover line-numbers"></div><div data-mprt="4" class="overlayWidgets"></div><div data-mprt="9" class="minimap slider-mouseover" role="presentation" aria-hidden="true"><div class="minimap-shadow-hidden"></div><canvas width="0" height="78"></canvas><canvas class="minimap-decorations-layer" width="0" height="78"></canvas><div class="minimap-slider"><div class="minimap-slider-horizontal"></div></div></div><div role="presentation" aria-hidden="true" class="blockDecorations-container"></div></div><div data-mprt="5" class="overflowingOverlayWidgets"></div></div></div></section></div></pre>
+```
+1
+2
+3
+4
+```
 
 Постфиксная форма: "a b c + /"
 Результат вычисления: Infinity (деление на ноль)
