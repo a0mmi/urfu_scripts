@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hamming encode / decode</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Hamming (encode / decode)</h1>
+
+    <div class="controls">
+      <label><input type="radio" name="mode" value="encode" checked /> Encode</label>
+      <label><input type="radio" name="mode" value="decode" /> Decode</label>
+    </div>
+
+    <label class="input-label">Введите битовую строку (0 и 1):</label>
+    <input id="bitsInput" class="bits-input" type="text" />
+
+    <div class="buttons">
+      <button id="runBtn">Выполнить</button>
+    </div>
+
+    <section id="outputArea" class="output" aria-live="polite">
+      <pre id="outputPre">Результат появится здесь...</pre>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
